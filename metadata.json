@@ -1,0 +1,6 @@
+{
+  "name": "SplitExact - Receipt Calculator & Payment Deduction Reconciler",
+  "description": "Accurately calculate itemized receipts, split costs among friends with custom portions, and audit payment deductions against bank statements to verify exact charge amounts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

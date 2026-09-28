@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "Receipt": {
+      "title": "Receipt",
+      "description": "A saved receipt with line items, tax, tip, custom tags, and cost splitting metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "merchant": { "type": "string" },
+        "date": { "type": "string" },
+        "currency": { "type": "string" },
+        "tags": { "type": "array", "description": "Category tags such as Groceries, Work Trip, Birthday Dinner" },
+        "items": { "type": "array" },
+        "discount": { "type": "number" },
+        "discountPercentage": { "type": "number" },
+        "taxRate": { "type": "number" },
+        "taxAmount": { "type": "number" },
+        "taxMode": { "type": "string" },
+        "tipRate": { "type": "number" },
+        "tipAmount": { "type": "number" },
+        "tipMode": { "type": "string" },
+        "tipBasis": { "type": "string" },
+        "fees": { "type": "array" },
+        "notes": { "type": "string" },
+        "allocationStrategy": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "merchant", "date", "currency"]
+    },
+    "UserSubscription": {
+      "title": "UserSubscription",
+      "description": "User trial and next active subscription plan status",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "status": { "type": "string", "enum": ["trial", "active", "expired", "free"] },
+        "planId": { "type": "string", "enum": ["free_tier", "pro_monthly", "pro_annual"] },
+        "trialStartDate": { "type": "string" },
+        "trialEndDate": { "type": "string" },
+        "trialUsed": { "type": "boolean" },
+        "subscriptionStartDate": { "type": "string" },
+        "nextBillingDate": { "type": "string" },
+        "autoRenew": { "type": "boolean" },
+        "aiScansUsed": { "type": "number" },
+        "maxTrialScans": { "type": "number" }
+      },
+      "required": ["userId", "status", "planId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/receipts/{receiptId}": {
+      "schema": "Receipt",
+      "description": "User's private receipts collection"
+    },
+    "/users/{userId}/subscription/current": {
+      "schema": "UserSubscription",
+      "description": "User's active trial or next recurring subscription plan status"
+    }
+  }
+}
